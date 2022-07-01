@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#gameBoard{
+    display: grid;
+
+    height: calc(600px + 4em);
+    width: calc(600px + 4em);
+    
+    grid-template-columns: repeat(3, 200px);
+    grid-template-rows: repeat(3, 200px);
+    background-color: black;
+    gap: 1em;
+    border: 1em solid black;
+
+}
+
+#gameBoard > .field{
+    width: 200px;
+    height: 200px;
+    background-color: white;
+}
