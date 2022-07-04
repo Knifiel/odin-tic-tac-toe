@@ -1,7 +1,10 @@
 const gameBoard = [];
 
 const isTaken = (i) => {
-    gameBoard[i] ? true : false;
+    console.log(gameBoard[i]);
+    if (gameBoard[i] !== undefined){
+        return true;
+    }
 };
 
 const board = {
@@ -18,6 +21,11 @@ const board = {
         }
     },
 
+    clearBoard(){
+        gameBoard.length = 0;
+        console.log('Board cleared. Empty board is:');
+        console.table(gameBoard);
+    }
 };
 
     export default board;
