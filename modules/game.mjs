@@ -7,7 +7,6 @@ const gameWindow = document.getElementById('playerWindow');
 let currentTurn;
 
 const turnIndicator = () => {
-    console.log(currentTurn);
     let indicator;
     if(document.getElementById('turnIndicator') === null){
         indicator = document.createElement('p');
@@ -36,11 +35,15 @@ const fieldPress = (e) =>{
 
 const displayResult = (state) =>{
     if(state === 'Draw'){
-        alert('The game is draw!');
-        nextGame();
+        setTimeout(() =>{
+            alert('The game is draw!');
+            nextGame();
+        }, 0)
     } else if(state !== undefined) {
-        alert(state + " wins!");
-        nextGame();
+        setTimeout(()=>{
+            alert(state + " wins!");
+            nextGame();
+        }, 0)
     }
 }
 
