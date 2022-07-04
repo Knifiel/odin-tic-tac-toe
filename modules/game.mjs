@@ -3,6 +3,7 @@ import player from "./player.mjs";
 import renderer from "./renderer.mjs";
 
 const gameWindow = document.getElementById('playerWindow');
+
 let currentTurn;
 
 const turnIndicator = () => {
@@ -22,6 +23,7 @@ const fieldPress = (e) =>{
     let i = e.target.dataset.id;
     if (board.setSymbol(currentTurn, i)){
         renderer.updateBoard();
+        if(checkState()){
         if (currentTurn === player.getPlayer(0)){
             currentTurn = player.getPlayer(1);
         } else {
@@ -29,16 +31,16 @@ const fieldPress = (e) =>{
         } 
         turnIndicator();
     }
-    if(checkState()){
-        displayResult(checkState());
     }
 }
 
 const displayResult = (state) =>{
     if(state === 'Draw'){
         alert('The game is draw!');
-    } else {
+        nextGame();
+    } else if(state !== undefined) {
         alert(state + " wins!");
+        nextGame();
     }
 }
 
@@ -48,16 +50,19 @@ const checkState = () =>{
 
     for(let i = 0; i<8; i += 3){
         if ((b[i]!==undefined)&&((b[i] === b[i+1])&&(b[i+1] === b[i+2]))){
-            return b[i].name;
+            displayResult(b[i].name);
+            return;
         }}
 
     for(let i=0; i<3; i++){
         if ((b[i]!==undefined)&&((b[i] === b[i+3])&&(b[i+3] === b[i+6]))){
-            return b[i].name;
+            displayResult(b[i].name);
+            return;
         }}
 
     if((b[4]!==undefined)&&(((b[0] === b[4])&&(b[4] === b[8]))||((b[2] === b[4])&&(b[4] === b[6])))){
-        return b[4].name; 
+        displayResult(b[4].name);
+        return; 
     }
 
     if(b.length === 9){
@@ -68,11 +73,11 @@ const checkState = () =>{
             }
         }
         if(full){
-            return "Draw";
+            displayResult("Draw");
+            return;
         } 
     }
-
-    return false;
+    return true;
 };
 
 const prepareField = () => {
@@ -81,13 +86,22 @@ const prepareField = () => {
             field.addEventListener('mousedown', (e) => fieldPress(e));
         });
         turnIndicator();
-};
+}
 
-const game = {
-    gameStart(){
-    currentTurn = (player.getPlayer(0));
-    prepareField();
+const gameStart = () => {
+currentTurn = (player.getPlayer(0));
+prepareField();
+}
+
+export const newGame = () => {
+        board.clearBoard();
+        renderer.newBoard();
+        player.makePlayers();
+        gameStart();
     }
-    };
 
-export default game;
+const nextGame = () =>{
+    board.clearBoard();
+    renderer.newBoard();
+    gameStart();
+}
