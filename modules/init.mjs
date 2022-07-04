@@ -1,5 +1,6 @@
 import renderer from "./renderer.mjs";
 import { newGame } from "./game.mjs";
+import { newGameAi } from "./game.mjs";
 
 const playerWindow = document.getElementById('playerWindow');
 
@@ -16,3 +17,4 @@ playerWindow.appendChild(button);
 playerWindow.appendChild(buttonAi);
 
 button.addEventListener('mousedown', () => newGame());
+buttonAi.addEventListener('mousedown', () => newGameAi());

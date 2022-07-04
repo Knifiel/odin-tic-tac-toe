@@ -3,20 +3,27 @@ class Player{
         this.name = name;
     }
 }
+class AiPlayer extends Player{
+    constructor(name){
+        super(name);
+        this.isAi = true;
+    }
+}
 
-const playerWindow = document.getElementById('playerWindow');
 const players = [];
 
-const makePlayerDisplay = () => {
+const playerWindow = document.getElementById('playerWindow');
+
+function makePlayerDisplay() {
     const button = document.getElementById('newGame');
     const buttonAi = document.getElementById('newGameAi');
     playerWindow.innerHTML = '';
     const player1label = document.createElement('p');
     const player2label = document.createElement('p');
-    const player1name = document.createElement('p'); 
+    const player1name = document.createElement('p');
     const player2name = document.createElement('p');
-    player1label.innerText = "Player 1:"
-    player2label.innerText = "Player 2:"
+    player1label.innerText = "Player 1:";
+    player2label.innerText = "Player 2:";
     player1name.innerText = player.getPlayer(0).name;
     player2name.innerText = player.getPlayer(1).name;
 
@@ -30,21 +37,24 @@ const makePlayerDisplay = () => {
     playerWindow.appendChild(buttonAi);
 }
 
-const promptPlayer = (i) => {
-    let name = prompt(`Enter player ${i+1} name`, `Player ${i+1}`);
-    if (name === "" ){
+function promptPlayer(i) {
+    let name = prompt(`Enter player ${i + 1} name`, `Player ${i + 1}`);
+    if (name === "") {
         promptPlayer(i);
     } else {
-        player.makePlayer(name);
+        makePlayer(name);
     }
+}
+function makePlayer(name) {
+    players.push(new Player(name));
+    console.log(players);
+}
+function enableAi() {
+    players.push(new AiPlayer('Ai'));
+    console.log(players);
 }
 
 const player ={
-        makePlayer(name){
-            players.push(new Player(name));
-            console.log(players);
-        },
-
         getPlayer(i){
             return players[i];
         },
@@ -60,10 +70,12 @@ const player ={
             promptPlayer(1);
             makePlayerDisplay();
         },
+
         makePlayersAi(){
             player.clearPlayers();
             promptPlayer(0);
-
+            enableAi();
+            makePlayerDisplay();
         }
 }
 
