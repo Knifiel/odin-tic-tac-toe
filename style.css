@@ -45,7 +45,7 @@
     gap: 0.5em;
 }
 
-#playerWindow.players > button{
+#playerWindow.players > button#newGame{
     font-size: 2em;
     padding: 0.3em;
     border-radius: 20px;
@@ -55,6 +55,19 @@
 
     position: absolute;
     right: -100%;
+    top: 50%;
+    transform:translateY(-50%);
+}
+#playerWindow.players > button#newGameAi{
+    font-size: 2em;
+    padding: 0.3em;
+    border-radius: 20px;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+    transition: 100ms ease-in-out;
+    grid-column: span 2;
+
+    position: absolute;
+    right: -200%;
     top: 50%;
     transform:translateY(-50%);
 }
@@ -76,7 +89,7 @@
     padding: 0.5em;
 }
 
-button.newgame{
+button#newGame, button#newGameAi{
     justify-self: center;
     font-size: 2em;
     padding: 0.3em;
@@ -86,7 +99,7 @@ button.newgame{
     transform: 300ms;
 }
 
-button.newgame:hover{
+button#newGame:hover, button#newGameAi:hover{
     cursor: pointer;
     border: 2px solid blue;
 }

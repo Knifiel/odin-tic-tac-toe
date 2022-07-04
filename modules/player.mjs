@@ -9,6 +9,7 @@ const players = [];
 
 const makePlayerDisplay = () => {
     const button = document.getElementById('newGame');
+    const buttonAi = document.getElementById('newGameAi');
     playerWindow.innerHTML = '';
     const player1label = document.createElement('p');
     const player2label = document.createElement('p');
@@ -26,6 +27,7 @@ const makePlayerDisplay = () => {
     playerWindow.appendChild(player2name);
 
     playerWindow.appendChild(button);
+    playerWindow.appendChild(buttonAi);
 }
 
 const promptPlayer = (i) => {
@@ -57,6 +59,11 @@ const player ={
             promptPlayer(0);
             promptPlayer(1);
             makePlayerDisplay();
+        },
+        makePlayersAi(){
+            player.clearPlayers();
+            promptPlayer(0);
+
         }
 }
 
